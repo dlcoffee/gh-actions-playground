@@ -6,9 +6,14 @@ name: Manual workflow
 # or API.
 on:
   workflow_dispatch: # manual trigger
-  push:
-    branches:
-      - main
+    inputs:
+      job:
+        description: "Job to run."
+        required: true
+        default: "deploy_int"
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   build:
@@ -26,28 +31,28 @@ jobs:
   deploy_int:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.job == 'dev-deploy'}}
+    if: ${{ github.event.inputs.job == 'deploy_int'}}
     steps:
       - name: Deploy to int
-        run: echo "deploying to int"
+        run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_qat:
     needs: deploy_int
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to qat
-        run: echo "deploying to qat"
+        run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_stg:
     needs: deploy_qat
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to stg
-        run: echo "deploying to stg"
+        run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_prd:
     needs: deploy_stg
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to prd
-        run: echo "deploying to prd"
+        run: echo "${{ github.event.inputs.job }} triggered!"
