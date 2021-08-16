@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: deployment
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -30,6 +30,7 @@ jobs:
 
   deploy_int:
     needs: build
+    environment: int
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.job == 'deploy_int'}}
     steps:
@@ -37,6 +38,7 @@ jobs:
         run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_qat:
+    environment: qat
     needs: deploy_int
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +46,7 @@ jobs:
         run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_stg:
+    environment: stg
     needs: deploy_qat
     runs-on: ubuntu-latest
     steps:
@@ -51,6 +54,7 @@ jobs:
         run: echo "${{ github.event.inputs.job }} triggered!"
 
   deploy_prd:
+    environment: prd
     needs: deploy_stg
     runs-on: ubuntu-latest
     steps:
