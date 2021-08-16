@@ -26,6 +26,7 @@ jobs:
   deploy_int:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.job == 'dev-deploy'}}
     steps:
       - name: Deploy to int
         run: echo "deploying to int"
