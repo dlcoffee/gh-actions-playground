@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"this is a test\""
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/dlcoffee/gh-actions-playground/issues"
   },
-  "homepage": "https://github.com/dlcoffee/gh-actions-playground#readme"
+  "homepage": "https://github.com/dlcoffee/gh-actions-playground#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
